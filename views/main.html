@@ -1,61 +1,40 @@
 <h2>Work Backlog</h2>
 
-<ul id="stagesList" ng-controller="BacklogController">
-    <li>
-        <h2>Aware</h2>
-        <div>
-            <ul>
-                <li class="item" ng-repeat="item in backlogItems.Aware">
-                    <ng-include src="'dataItemTemplate'"></ng-include>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <h2>Backlog</h2>
-        <div>
-            <ul>
-                <li class="item"  ng-repeat="item in backlogItems.Backlog">
-                    <ng-include src="'dataItemTemplate'"></ng-include>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <h2>Scheduled</h2>
-        <div>
-            <ul>
-                <li class="item"  ng-repeat="item in backlogItems.Scheduled">
-                    <ng-include src="'dataItemTemplate'"></ng-include>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <h2>InProgress</h2>
-        <div>
-            <ul>
-                <li class="item"  ng-repeat="item in backlogItems.InProgress">
-                    <ng-include src="'dataItemTemplate'"></ng-include>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <h2>Delivery</h2>
-        <div>
-            <ul>
-                <li class="item"  ng-repeat="item in backlogItems.Delivery">
-                    <ng-include src="'dataItemTemplate'"></ng-include>
-                </li>
-            </ul>
-        </div>
-    </li>
-</ul>
+<div id="stagesList" ng-controller="BacklogController">
+    <div class="stage">
+        <h3>Aware</h3>
+        <figure class="card" ng-repeat="item in backlogItems.Aware">
+            <ng-include src="'dataItemTemplate'"></ng-include>
+        </figure>
+    </div>
+    <div class="stage">
+        <h3>Backlog</h3>
+        <figure class="card" ng-repeat="item in backlogItems.Backlog">
+            <ng-include src="'dataItemTemplate'"></ng-include>
+        </figure>
+    </div>
+    <div class="stage">
+        <h3>Scheduled</h3>
+        <figure class="card" ng-repeat="item in backlogItems.Scheduled">
+            <ng-include src="'dataItemTemplate'"></ng-include>
+        </figure>
+    </div>
+    <div class="stage">
+        <h3>InProgress</h3>
+        <figure class="card" ng-repeat="item in backlogItems.InProgress">
+            <ng-include src="'dataItemTemplate'"></ng-include>
+        </figure>
+    </div>
+    <div class="stage">
+        <h3>Delivery</h3>
+        <figure class="card" ng-repeat="item in backlogItems.Delivery">
+            <ng-include src="'dataItemTemplate'"></ng-include>
+        </figure>
+    </div>
+</div>
 
 <script type='text/ng-template' id="dataItemTemplate"> 
-    <div class="itemTemplate">
-        <h3 class="itemHeader">{{item.title}}</h3>
-        <div class="itemDescription">{{item.description}}</div>
-    </div>
+    <div class="corner"></div>
+    <div class="feature">{{item.title}}</div>
+    <figcaption class="caption">{{item.description}}</figcaption>
 </script> 
