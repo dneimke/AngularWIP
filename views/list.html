@@ -34,7 +34,7 @@
 </div>
 
 <script type='text/ng-template' id="dataItemTemplate"> 
-<h3 class="cardTitle">{{item.title}}</h3>
+<h3 class="cardTitle"><a ng-href='/#/view/{{item.title}}'>{{item.title}}</a></h3>
 <figcaption class="caption">{{item.description}}</figcaption>
 <div class="actions">
     <div class="action-item" title="move left" ng-hide="item.phase == 1">
