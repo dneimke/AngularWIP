@@ -1,3 +1,5 @@
+/*global app*/
+
 app.factory('Jobs', function () {
         
         var data = {}, items = [{
