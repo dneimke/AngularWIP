@@ -6,7 +6,8 @@ body {
 }
 
 a, a:visited {
-    color: orange;   
+    color: orange;  
+    text-decoration: none;
 }
 
 div.stage {
@@ -14,8 +15,8 @@ div.stage {
     width: 17%;
     border: 2px solid #FAFAFA;
     box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-    margin: 0px 5px;
-    padding: 15px;
+    margin: 0px 10px;
+    padding: 6px;
     padding-bottom: 5px;
     background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
 }
@@ -23,25 +24,16 @@ div.stage {
 .stage h2 {
     display: inline;
     font-size: 15px;
-    line-height: 18px;
-    margin: 0 3px 0 0;
-    min-height: 19px;
-    min-width: 30px;
 }
 
 figure {
-    display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 40px;
-    -webkit-margin-end: 40px;
+    
 }
 
 .card {
     display: inline-block;
-    position: relative;
-    width: 95%;
-    min-width: 70px;
+    width: 96%;
+    min-width: 90px;
     margin: 4px;
     padding: 1%;
     vertical-align: top;
@@ -49,9 +41,9 @@ figure {
     box-shadow: 2px 2px 4px #aaa;
 }
 
-h3.cardTitle {
+.card h3.cardTitle {
     display: block;
-    font-size: 11px;
+    font-size: 10px;
     line-height: 18px;
     margin: 0px;
     min-height: 19px;
@@ -62,36 +54,56 @@ h3.cardTitle {
     padding: 3px;
 }
 
-.caption {
-	width: 98%;
+.card .caption {
+	width: 96%;
+    font-size: 12px;
     margin-top: 8px;
+    padding-left: 8px;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis; 
 }
 
-.action-item {
+.card .gutter {
+    border-top: 1px solid black;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border: 1px solid #dcdcdc;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 7px;
+    overflow-y: hidden;
+    padding: 4px 4px 4px 8px;
+}
+
+.card .action-item {
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.card .left {
     display: inline;
     float: left;
     margin-right: 7px;
-    cursor: pointer;
 }
 
-.action-icon {
+.card .right {
     display: inline;
     float: right;
     margin-left: 7px;
-    cursor: pointer;
 }
 
-.icon-sm {
-    float: right;
-    height: 18px;
-    margin: 7px 0 0 8px;
-    padding-left: 3px;
-    width: 18px;
+.card .button-sm {
+    padding-left: 4px;
+    width: 14px;
     background-color: #404040;
     color: #fff;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
+
+
+
+.thumbnail { height: 280px !important; }
+.btn-droppable { width: 180px; height: 30px; padding-left: 4px; }
+.btn-draggable { width: 160px; }
