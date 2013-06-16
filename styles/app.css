@@ -26,6 +26,14 @@ div.stage {
     font-size: 15px;
 }
 
+input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}
+
+input.ng-valid.ng-dirty {
+    background-color: #78FA89;
+}
+
 figure {
     
 }
@@ -49,9 +57,14 @@ figure {
     min-height: 19px;
     min-width: 30px;
     text-transform: uppercase;
-    background-color: #444;
+    background-color: #333;
     border: 1px solid #888;
     padding: 3px;
+}
+
+.card h3.cardTitle a, .card h3.cardTitle a:visited {
+    color: orange;  
+    text-decoration: none;
 }
 
 .card .caption {
@@ -102,7 +115,19 @@ figure {
     font-size: 12px;
 }
 
+.card .notes {
+    padding-left: 4px;
+    width: 12px;
+    height: 16px;
+    background-image:url(/images/file.png)   
+}
 
+.card .no-notes {
+    padding-left: 4px;
+    width: 12px;
+    height: 16px;
+    background-image:url(/images/file4.png)   
+}
 
 .thumbnail { height: 280px !important; }
 .btn-droppable { width: 180px; height: 30px; padding-left: 4px; }

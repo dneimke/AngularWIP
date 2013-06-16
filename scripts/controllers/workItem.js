@@ -1,3 +1,5 @@
+/*global app*/
+
 app.controller('BacklogItemController', function ($scope, $routeParams, Jobs) {
     'use strict';
     

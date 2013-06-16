@@ -1,39 +1,89 @@
 <h2>Work Backlog</h2>
 
-<div id="stagesList" ng-controller="BacklogListController">
-    <div class="stage">
-        <h2>Aware</h2>
-        <figure class="card" ng-repeat="item in backlogItems.Aware">
-            <ng-include src="'dataItemTemplate'"></ng-include>
-        </figure>
+<div data-ng-controller="JobEditorController">
+    <div data-ng-hide='isEditing'>
+        <a data-ng-click='toggleEditMode()'>Create New Job</a>
     </div>
-    <div class="stage">
-        <h2>Backlog</h2>
-        <figure class="card" ng-repeat="item in backlogItems.Backlog">
-            <ng-include src="'dataItemTemplate'"></ng-include>
-        </figure>
-    </div>
-    <div class="stage">
-        <h2>Scheduled</h2>
-        <figure class="card" ng-repeat="item in backlogItems.Scheduled">
-            <ng-include src="'dataItemTemplate'"></ng-include>
-        </figure>
-    </div>
-    <div class="stage">
-        <h2>InProgress</h2>
-        <figure class="card" ng-repeat="item in backlogItems.InProgress">
-            <ng-include src="'dataItemTemplate'"></ng-include>
-        </figure>
-    </div>
-    <div class="stage">
-        <h2>Delivery</h2>
-        <figure class="card" ng-repeat="item in backlogItems.Delivery">
-            <ng-include src="'dataItemTemplate'"></ng-include>
-        </figure>
+    <div ng-show='isEditing'>
+        <form name='addJob'>
+            <strong>Title:</strong> <input type='text' required='required' name='title' ng-model='job.title' size="80" /> <br />
+            <strong>Application:</strong> <select required='required' name='applicationName' ng-model='job.application' ng-options="item as item for item in applicationNames"></select> <br />
+            <strong>Description:</strong> <textarea type='text' name='description' required='required' ng-model='job.description' rows='3' cols='60'></textarea> <br />
+            <strong>Assigned To:</strong> <input type='text' name='assignedTo' ng-model='job.assignedTo' /> <br />
+            <strong>Due Date:</strong> <input type='date' name='dueDate' required='required' ng-model='job.dueDate' /> <br />
+            <strong>Phase:</strong> <select required='required' name='phase' ng-model='job.phase' ng-options="phase.phase as phase.displayName for phase in phases"></select> <br />
+            <strong>Stage:</strong> <select required='required' name='stage' ng-model='job.stage' ng-options="stage.stage as stage.displayName for stage in stages"></select> <br />
+            <button ng-click='toggleEditMode()'>Cancel</button>
+            <input type='submit' ng-click='save(job)' ng-disabled='addJob.$invalid' />
+            <label for='showDebugInfo'>Debug</label> <input type='checkbox' name='showDebugInfo' ng-model='showDebugInfo' />
+        </form>
+        
+        <pre ng-show='showDebugInfo'>{{job | json}}</pre>
+        
     </div>
 </div>
 
-<script type='text/ng-template' id="dataItemTemplate"> 
+
+<div id="stagesList" ng-controller="BacklogListController">
+    <div>
+        <div class="stage">
+            <h2>Aware</h2>
+            <figure class="card" ng-repeat="item in backlogItems.Aware">
+                <ng-include src="'dataItemTemplate'"></ng-include>
+            </figure>
+        </div>
+        <div class="stage">
+            <h2>Backlog</h2>
+            <figure class="card" ng-repeat="item in backlogItems.Backlog">
+                <ng-include src="'dataItemTemplate'"></ng-include>
+            </figure>
+        </div>
+        <div class="stage">
+            <h2>Scheduled</h2>
+            <figure class="card" ng-repeat="item in backlogItems.Scheduled">
+                <ng-include src="'dataItemTemplate'"></ng-include>
+            </figure>
+        </div>
+        <div class="stage">
+            <h2>InProgress</h2>
+            <figure class="card" ng-repeat="item in backlogItems.InProgress">
+                <ng-include src="'dataItemTemplate'"></ng-include>
+            </figure>
+        </div>
+        <div class="stage">
+            <h2>Delivery</h2>
+            <figure class="card" ng-repeat="item in backlogItems.Delivery">
+                <ng-include src="'dataItemTemplate'"></ng-include>
+            </figure>
+        </div>
+    </div>
+    <div style="display: block;">
+        <label for='showDebugInfo'>Debug</label> <input type='checkbox' name='showDebugInfo' ng-model='showDebugInfo' />
+        <textarea ng-show='showDebugInfo' rows="70" cols="280">{{jobs | json}}</textarea>
+    </div>
+    <div modal="shouldBeOpen" close="closeNotes()" options="opts">
+        <div class="modal-header">
+            <h4>Comments</h4>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="note in selectedItem.notes"><b>{{note.date}}:</b> {{note.note}}</li>
+            </ul>
+            <div collapse="isCollapsed">
+                <textarea ng-model='newNote' rows='4' cols='70'></textarea>
+                <button class="btn" ng-click="saveNewNote()">Save Note</button>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" ng-click="addNote()">New Note</button>
+            <button class="btn btn-warning cancel" ng-click="closeNotes()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script type='text/ng-template' id='dataItemTemplate'> 
 <h3 class="cardTitle"><a ng-href='/#/view/{{item.title}}'>{{item.title}}</a></h3>
 <figcaption class="caption">{{item.description}}</figcaption>
 <div class="gutter">
@@ -46,8 +96,12 @@
     <div class="action-item left" title="due on {{item.dueDate}}">  
         <span class="action-text">{{item.dueDate}}</span>
     </div>
+
     <div class="action-item right button-sm" title="move right" ng-hide="item.phase == 5">  
         <span class="icon-sm" ng-click='moveRight(item)'>></span>
+    </div>
+    <div ng-class="item.notes.length > 0 ? 'action-item right notes' : 'action-item right no-notes'">  
+        <span class="icon-sm" ng-click='openNotes(item)'>&nbsp;</span>
     </div>
 </div>
 </script> 

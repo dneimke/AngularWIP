@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html ng-app='devWIP'>
     <head>
-      <title>Binding WIP Items</title>
-      <link rel="stylesheet" href="styles/app.css" />
+        <title>Binding WIP Items</title>
+        <link rel="stylesheet" href="styles/app.css" />
+        <link rel="stylesheet" href="styles/bootstrap.css" />
     </head>
     <body>
         
         <div ng-view></div>
         
-        <script src='http://code.angularjs.org/1.0.6/angular.min.js'></script>
+        <script src='http://code.angularjs.org/1.1.5/angular.min.js'></script>
+        <script src='scripts/ui-bootstrap-0.3.0.js'></script>
+        <script src='scripts/globals.js'></script>
         <script src='scripts/app.js'></script>
-        <script src='scripts/Jobs.js'></script>
-        <script src='scripts/BacklogListController.js'></script>
-        <script src='scripts/BacklogItemController.js'></script>
+        <script src='scripts/services/Jobs.js'></script>
+        <script src='scripts/controllers/workItems.js'></script>
+        <script src='scripts/controllers/workItem.js'></script>
+        <script src='scripts/controllers/workItemEditor.js'></script>
     </body>
 </html>

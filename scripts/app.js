@@ -5,7 +5,7 @@ var app;
 (function () {
     'use strict';
    
-    app = angular.module('devWIP', []);
+    app = angular.module('devWIP', ['ui.bootstrap']);
     
     app.config(function ($routeProvider) {
     
