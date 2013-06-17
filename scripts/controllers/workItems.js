@@ -15,27 +15,14 @@ app.controller('workItemsController', function ($scope, $dialog, phaseFilter, Jo
         job.phase += 1;
     };
     
-    /* Editor */
     $scope.openEditor = function () {
         var d = $dialog.dialog({dialogFade: true});
         d.open('/dialogs/item-editor.html', 'workItemEditorController');
     };
     
-    
-    var commentDialogOptions = {
-        controller: 'workItemCommentsController',
-        templateUrl: 'dialogs/item-comments.html'
-    };
-    
-    /* Notes */
     $scope.openNotes = function (item) {
-        $dialog.dialog(angular.extend(commentDialogOptions, {resolve: {item: function () {return item; }}}))
-            .open();
-//            .then(function (result.hasNote) {
-//                if (result) {
-//                    item.notes.push(result.note);
-//                }
-//            });
+        var d = $dialog.dialog({dialogFade: true, resolve: { item: function () { return item; }}});
+        d.open('/dialogs/item-comments.html', 'workItemCommentsController');
     };
     
     $scope.$watch('jobs', function () {
