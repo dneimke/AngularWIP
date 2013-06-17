@@ -41,26 +41,6 @@
         <label for='showDebugInfo'>Debug</label> <input type='checkbox' name='showDebugInfo' ng-model='showDebugInfo' />
         <textarea ng-show='showDebugInfo' rows="70" cols="280">{{jobs | json}}</textarea>
     </div>
-    
-    
-    <div modal="notesVisible" close="closeNotes()" options="opts">
-        <div class="modal-header">
-            <h4>Comments</h4>
-        </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="note in selectedItem.notes"><b>{{note.date}}:</b> {{note.note}}</li>
-            </ul>
-            <div collapse="noteEditorCollapsed">
-                <textarea ng-model='newNote' rows='4' cols='70'></textarea>
-                <button class="btn" ng-click="saveNewNote()">Save Note</button>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-warning cancel" ng-click="closeNotes()">Cancel</button>
-            <button class="btn" ng-click="addNote()">New Note</button>
-        </div>
-    </div>
 </div>
 
 

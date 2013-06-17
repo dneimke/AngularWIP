@@ -1,14 +1,22 @@
-<form name='addJob'>
-    <strong>Title:</strong> <input type='text' required='required' name='title' ng-model='job.title' size="80" /> <br />
-    <strong>Application:</strong> <select required='required' name='applicationName' ng-model='job.application' ng-options="item as item for item in applicationNames"></select> <br />
-    <strong>Description:</strong> <textarea type='text' name='description' required='required' ng-model='job.description' rows='3' cols='60'></textarea> <br />
-    <strong>Assigned To:</strong> <input type='text' name='assignedTo' ng-model='job.assignedTo' /> <br />
-    <strong>Due Date:</strong> <input type='date' name='dueDate' required='required' ng-model='job.dueDate' /> <br />
-    <strong>Phase:</strong> <select required='required' name='phase' ng-model='job.phase' ng-options="phase.phase as phase.displayName for phase in phases"></select> <br />
-    <strong>Stage:</strong> <select required='required' name='stage' ng-model='job.stage' ng-options="stage.stage as stage.displayName for stage in stages"></select> <br />
-    <button ng-click='cancel()'>Cancel</button>
-    <input type='submit' ng-click='save(job)' ng-disabled='addJob.$invalid' />
-    <label for='showDebugInfo'>Debug</label> <input type='checkbox' name='showDebugInfo' ng-model='showDebugInfo' />
-</form>
+<div class="modal-header">
+    <h4>Work Item</h4>
+</div>
+<div class="modal-body">
+    <form name='addJob'>
+        <strong>Title:</strong> <input type='text' required='required' name='title' ng-model='job.title' size="80" /> <br />
+        <strong>Application:</strong> <select required='required' name='applicationName' ng-model='job.application' ng-options="item as item for item in applicationNames"></select> <br />
+        <strong>Description:</strong> <textarea type='text' name='description' required='required' ng-model='job.description' rows='3' cols='60'></textarea> <br />
+        <strong>Assigned To:</strong> <input type='text' name='assignedTo' ng-model='job.assignedTo' /> <br />
+        <strong>Due Date:</strong> <input type='date' name='dueDate' required='required' ng-model='job.dueDate' /> <br />
+        <strong>Phase:</strong> <select required='required' name='phase' ng-model='job.phase' ng-options="phase.phase as phase.displayName for phase in phases"></select> <br />
+        <strong>Stage:</strong> <select required='required' name='stage' ng-model='job.stage' ng-options="stage.stage as stage.displayName for stage in stages"></select> <br />
+        <button ng-click='cancel()'>Cancel</button>
+        <input type='submit' ng-click='save(job)' ng-disabled='addJob.$invalid' />
+        <label for='showDebugInfo'>Debug</label> <input type='checkbox' name='showDebugInfo' ng-model='showDebugInfo' />
+    </form>
+</div>
+<div class="modal-footer">
+    <pre ng-show='showDebugInfo'>{{job | json}}</pre>
+</div>
+    
 
-<pre ng-show='showDebugInfo'>{{job | json}}</pre>

@@ -1,6 +1,6 @@
 /*global app, angular, console, applicationNames, sdlcStages, backlogPhases*/
 
-app.controller('workItemEditorController', ['$scope', 'dialog', function ($scope, dialog, Jobs) {
+app.controller('workItemEditorController', ['$scope', 'dialog', 'Jobs', function ($scope, dialog, Jobs) {
     'use strict';
     
     var template = {

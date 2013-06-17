@@ -1,0 +1,18 @@
+<div close="closeNotes()">
+    <div class="modal-header">
+        <h4>Comments</h4>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="note in selectedItem.notes"><b>{{note.date}}:</b> {{note.note}}</li>
+        </ul>
+        <div collapse="noteEditorCollapsed">
+            <textarea ng-model='newNote' rows='4' cols='70'></textarea>
+            <button class="btn" ng-click="save()">Save Note</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning cancel" ng-click="cancel()">Cancel</button>
+        <button class="btn" ng-click="noteEditorCollapsed = false">New Note</button>
+    </div>
+</div>

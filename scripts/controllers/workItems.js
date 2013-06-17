@@ -1,16 +1,10 @@
-/*global app*/
+/*global app, angular*/
 
 app.controller('workItemsController', function ($scope, $dialog, phaseFilter, Jobs, dateFilter) {
     'use strict';
     
     $scope.jobs = Jobs.list();
-    
-    $scope.newNote = '';
-    $scope.noteEditorCollapsed = true;
-    $scope.notesVisible = false;
-    $scope.selectedItem = {};
     $scope.showDebugInfo = false;
-    
     $scope.backlogItems = phaseFilter($scope.jobs);
     
     $scope.moveLeft = function (job) {
@@ -23,39 +17,27 @@ app.controller('workItemsController', function ($scope, $dialog, phaseFilter, Jo
     
     /* Editor */
     $scope.openEditor = function () {
-        var d = $dialog.dialog({dialogFade: false});
+        var d = $dialog.dialog({dialogFade: true});
         d.open('/dialogs/item-editor.html', 'workItemEditorController');
     };
     
     
+    var commentDialogOptions = {
+        controller: 'workItemCommentsController',
+        templateUrl: 'dialogs/item-comments.html'
+    };
+    
     /* Notes */
     $scope.openNotes = function (item) {
-        $scope.selectedItem = item;
-        $scope.notesVisible = true;
+        $dialog.dialog(angular.extend(commentDialogOptions, {resolve: {item: function () {return item; }}}))
+            .open();
+//            .then(function (result.hasNote) {
+//                if (result) {
+//                    item.notes.push(result.note);
+//                }
+//            });
     };
     
-    $scope.closeNotes = function () {
-        $scope.selectedItem = {};
-        $scope.newNote = '';
-        $scope.noteEditorCollapsed = true;
-        $scope.notesVisible = false;
-    };
-    
-    $scope.addNote = function () {
-        $scope.newNote = '';
-        $scope.noteEditorCollapsed = false;
-    };
-    
-    $scope.saveNewNote = function () {
-        if ($scope.selectedItem.notes === undefined || $scope.selectedItem.notes.length === 0) {
-            $scope.selectedItem.notes = [];
-        }
-        $scope.selectedItem.notes.push({date: dateFilter(Date.now(), 'dd-MMM-yyyy'), note: $scope.newNote});
-        $scope.newNote = '';
-        $scope.noteEditorCollapsed = true;
-    };
-  
-
     $scope.$watch('jobs', function () {
         $scope.backlogItems = phaseFilter($scope.jobs);
     }, true);
