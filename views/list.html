@@ -1,30 +1,10 @@
 <h2>Work Backlog</h2>
 
-<div data-ng-controller="JobEditorController">
-    <div data-ng-hide='isEditing'>
-        <a data-ng-click='toggleEditMode()'>Create New Job</a>
+<div id="stagesList" ng-controller="workItemsController">
+    <div>
+        <a data-ng-click='openEditor()'>Create New Job</a>
     </div>
-    <div ng-show='isEditing'>
-        <form name='addJob'>
-            <strong>Title:</strong> <input type='text' required='required' name='title' ng-model='job.title' size="80" /> <br />
-            <strong>Application:</strong> <select required='required' name='applicationName' ng-model='job.application' ng-options="item as item for item in applicationNames"></select> <br />
-            <strong>Description:</strong> <textarea type='text' name='description' required='required' ng-model='job.description' rows='3' cols='60'></textarea> <br />
-            <strong>Assigned To:</strong> <input type='text' name='assignedTo' ng-model='job.assignedTo' /> <br />
-            <strong>Due Date:</strong> <input type='date' name='dueDate' required='required' ng-model='job.dueDate' /> <br />
-            <strong>Phase:</strong> <select required='required' name='phase' ng-model='job.phase' ng-options="phase.phase as phase.displayName for phase in phases"></select> <br />
-            <strong>Stage:</strong> <select required='required' name='stage' ng-model='job.stage' ng-options="stage.stage as stage.displayName for stage in stages"></select> <br />
-            <button ng-click='toggleEditMode()'>Cancel</button>
-            <input type='submit' ng-click='save(job)' ng-disabled='addJob.$invalid' />
-            <label for='showDebugInfo'>Debug</label> <input type='checkbox' name='showDebugInfo' ng-model='showDebugInfo' />
-        </form>
-        
-        <pre ng-show='showDebugInfo'>{{job | json}}</pre>
-        
-    </div>
-</div>
 
-
-<div id="stagesList" ng-controller="BacklogListController">
     <div>
         <div class="stage">
             <h2>Aware</h2>
@@ -61,7 +41,9 @@
         <label for='showDebugInfo'>Debug</label> <input type='checkbox' name='showDebugInfo' ng-model='showDebugInfo' />
         <textarea ng-show='showDebugInfo' rows="70" cols="280">{{jobs | json}}</textarea>
     </div>
-    <div modal="shouldBeOpen" close="closeNotes()" options="opts">
+    
+    
+    <div modal="notesVisible" close="closeNotes()" options="opts">
         <div class="modal-header">
             <h4>Comments</h4>
         </div>
@@ -69,14 +51,14 @@
             <ul>
                 <li ng-repeat="note in selectedItem.notes"><b>{{note.date}}:</b> {{note.note}}</li>
             </ul>
-            <div collapse="isCollapsed">
+            <div collapse="noteEditorCollapsed">
                 <textarea ng-model='newNote' rows='4' cols='70'></textarea>
                 <button class="btn" ng-click="saveNewNote()">Save Note</button>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn" ng-click="addNote()">New Note</button>
             <button class="btn btn-warning cancel" ng-click="closeNotes()">Cancel</button>
+            <button class="btn" ng-click="addNote()">New Note</button>
         </div>
     </div>
 </div>

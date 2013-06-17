@@ -1,13 +1,13 @@
-/*global app, angular, applicationNames, sdlcStages, backlogPhases*/
+/*global app, angular, console, applicationNames, sdlcStages, backlogPhases*/
 
-app.controller('JobEditorController', function ($scope, Jobs) {
+app.controller('workItemEditorController', ['$scope', 'dialog', function ($scope, dialog, Jobs) {
     'use strict';
     
     var template = {
         title: '',
         application: '',
         description: '',
-        assignedTo: '',
+        assignedTo: 'Not yet assigned',
         dueDate: '',
         phase: '',
         stage: ''
@@ -20,16 +20,13 @@ app.controller('JobEditorController', function ($scope, Jobs) {
     $scope.stages = sdlcStages;
     $scope.phases = backlogPhases;
     
-    $scope.isEditing = false;
-    
-    $scope.toggleEditMode = function () {
-        $scope.isEditing = !$scope.isEditing;
-    };
-    
     $scope.save = function (job) {
-        console.log(job.$invalid);
         Jobs.add(job);
         $scope.job = angular.copy(template);
-        $scope.isEditing = false;
+        dialog.close('ok');
     };
-});
+    
+    $scope.cancel = function () {
+        dialog.close('cancel');
+    };
+}]);

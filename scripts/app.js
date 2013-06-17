@@ -5,7 +5,9 @@ var app;
 (function () {
     'use strict';
    
-    app = angular.module('devWIP', ['ui.bootstrap']);
+    app = angular.module('devWIP', ['ui.bootstrap', 'ui.bootstrap.dialog'], function ($dialogProvider) {
+        $dialogProvider.options({backdropClick: false, dialogFade: true});
+    });
     
     app.config(function ($routeProvider) {
     
